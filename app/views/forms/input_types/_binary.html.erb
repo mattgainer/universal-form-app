@@ -1,0 +1,4 @@
+<%= f.label key.to_sym, "Value of 1", value: 1 %>
+<%= f.radio_button key.to_sym, 1, checked: !!value %>
+<%= f.label key.to_sym, "Value of 0", value: 0 %>
+<%= f.radio_button key.to_sym, 0, checked: (value == 0) %>

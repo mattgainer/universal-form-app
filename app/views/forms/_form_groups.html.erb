@@ -1,0 +1,4 @@
+<div>
+  <%= f.label key.to_sym %><br>
+    <%= render partial: "forms/input_types/#{data.column_for_attribute(key).type.to_s}", locals: {key: key, value: value, f:f, data: data} %>
+</div>
