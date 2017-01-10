@@ -12,6 +12,17 @@ module FormsHelper
     return keys
   end
 
+  def get_association(key, instance)
+    get_foreign_keys(instance).each do |info|
+      puts key
+      puts info[:foreign_key]
+      if info[:foreign_key] == key.to_s
+        return info
+      end
+    end
+    return {foreign_key: "No Foreign Key", class_name: "No Class Name", name: "No Name"}
+  end
+
   def generate_new_instance(params, instance)
     input_hash = {}
     (instance.attributes.keys.map {|k| k.to_sym}).each do |key|

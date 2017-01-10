@@ -2,7 +2,7 @@
   function validate<%= key.capitalize %>KeyPress(el, evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode;
     var number = el.value.split('.');
-    var precision = <%= data.column_for_attribute(key).precision %>
+    var precision = <%= instance.column_for_attribute(key).precision %>
     if (el.value.toString().length == precision + 1 || number.length == 1 && el.value.toString().length == precision) {
       return false;
     }
@@ -16,7 +16,7 @@
     //get the carat position
     var caratPos = getSelectionStart(el);
     var dotPos = el.value.indexOf(".");
-    if( caratPos > dotPos && dotPos>-1 && (number[1].length >= <%= data.column_for_attribute(key).scale if data.column_for_attribute(key).scale != 0 %><%= data.column_for_attribute(key).precision if data.column_for_attribute(key).scale == 0 %>)){
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length >= <%= instance.column_for_attribute(key).scale if instance.column_for_attribute(key).scale != 0 %><%= instance.column_for_attribute(key).precision if instance.column_for_attribute(key).scale == 0 %>)){
         return false;
     }
     return true;

@@ -2,6 +2,10 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
   FORM_EXCEPTION = ["id", "created_at", "updated_at"]
   
+  def self.form_selectable
+    all
+  end
+  
   def self.generate_new_instance(params)
     instance = new
     input_hash = {}
@@ -11,12 +15,6 @@ class ApplicationRecord < ActiveRecord::Base
         year = params[key.to_s + "(1i)"].to_i
         month = params[key.to_s + "(2i)"].to_i
         day = params[key.to_s + "(3i)"].to_i
-        puts "**********************"
-        puts key
-        puts year
-        puts month
-        puts day
-        puts "**********************"
         input_hash[key] = Date.new(year, month, day)
       elsif ["time", :time].include?(instance.column_for_attribute(key).type)
         hour = params[key.to_s + "(4i)"].to_i

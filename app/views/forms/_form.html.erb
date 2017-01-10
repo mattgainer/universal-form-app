@@ -2,9 +2,9 @@
 <br>
 <br>
 <br>
-<% data.attributes.each do |key, value| %>
-  <% if check_exception(key, data) %>
-    <%= render partial: 'forms/form_groups', locals: {key: key, value: value, data: data, f: f} %>
+<% instance.attributes.each do |key, value| %>
+  <% if check_exception(key, instance) %>
+    <%= render partial: 'forms/form_groups', locals: {key: key, value: value, instance: instance, f: f} %>
   <% end %>
   <br>
 <% end %>
