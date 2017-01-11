@@ -22,24 +22,4 @@ module FormsHelper
     end
     return {foreign_key: "No Foreign Key", class_name: "No Class Name", name: "No Name"}
   end
-
-  def generate_new_instance(params, instance)
-    input_hash = {}
-    (instance.attributes.keys.map {|k| k.to_sym}).each do |key|
-      if ["date", :date].includes?(instance.column_for_attribute(key).type)
-        year = params[key.to_s + "(i1)"]
-        month = params[key.to_s + "(i2)"]
-        day = params[key.to_s + "(i3)"]
-        input_hash[key] = Date.new(year, month, day)
-      elsif ["time", :time].includes?(instance.column_for_attribute(key).type)
-        hour = params[key.to_s + "(i4)"]
-        minute = params[key.to_s + "(i5)"]
-      elsif ["datetime", :datetime].includes?(instance.column_for_attribute(key).type)
-        
-      else
-        input_hash[key] = params[key]
-      end
-    end
-    return instance.attributes(input_hash)
-  end
 end

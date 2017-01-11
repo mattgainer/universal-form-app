@@ -3,7 +3,11 @@ class ApplicationRecord < ActiveRecord::Base
   FORM_EXCEPTION = ["id", "created_at", "updated_at"]
   
   def self.form_selectable
-    all
+    return all
+  end
+
+  def self.form_select_text
+    return new.attributes.keys[1]
   end
   
   def self.generate_new_instance(params)

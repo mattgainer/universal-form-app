@@ -1,1 +1,2 @@
-<%#= f.collection_select %>
+<% model = get_association(key, instance)[:class_name].constantize %>
+<%= f.collection_select key.to_sym, model.form_selectable, model.primary_key.to_sym, model.form_select_text %>
