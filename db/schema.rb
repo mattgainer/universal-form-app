@@ -12,28 +12,31 @@
 
 ActiveRecord::Schema.define(version: 20170109220146) do
 
-  create_table "firsts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "firsts", force: :cascade do |t|
     t.string   "name"
-    t.binary   "bin",         limit: 65535
+    t.binary   "bin"
     t.boolean  "active"
     t.date     "due_date"
-    t.decimal  "cash",                      precision: 5, scale: 3
-    t.float    "longitude",   limit: 24
+    t.decimal  "cash",        precision: 5, scale: 3
+    t.float    "longitude"
     t.integer  "second_id"
     t.integer  "third_value"
-    t.text     "description", limit: 65535
+    t.text     "description"
     t.time     "alarm"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  create_table "seconds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "seconds", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "thirds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thirds", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
