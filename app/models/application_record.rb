@@ -1,9 +1,17 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
-  FORM_EXCEPTION = ["id", "created_at", "updated_at"]
-  
+  # Returns array of strings of column names that don't get fields in the forms, defaulted to Rails
+  ## default primary key field and default timestamps
+  # 
+  def self.form_exception 
+    return ["id", "created_at", "updated_at"]
+  end
+  # Exposes form_selectable class method that 
   def self.form_selectable
     return all
+  end
+  def self.check_exception(key)
+    return !form_exception.include?(key)
   end
 
   def self.form_select_text
@@ -37,5 +45,21 @@ class ApplicationRecord < ActiveRecord::Base
     end
     instance.attributes = input_hash
     return instance
+  end
+
+  def self.get_foreign_keys
+    keys = []
+    reflect_on_all_associations.each do |a|
+      keys << {foreign_key: a.foreign_key, class_name: a.class_name, name: a.name}
+    end
+    return keys    
+  end
+  def self.get_association(key)
+    get_foreign_keys.each do |info|
+      if info[:foreign_key] == key.to_s
+        return info
+      end
+    end
+    return {foreign_key: "No Foreign Key", class_name: "No Class Name", name: "No Name"}
   end
 end

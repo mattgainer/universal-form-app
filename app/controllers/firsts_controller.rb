@@ -13,6 +13,10 @@ class FirstsController < ApplicationController
     puts @first.attributes
   end
 
+  def test
+    
+  end
+
   private
 
   def first_params

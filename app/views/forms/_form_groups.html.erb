@@ -1,6 +1,6 @@
 <div>
-  <% if (get_foreign_keys(instance).map{|hash| hash[:foreign_key]}).include?(key) %>
-    <%= f.label key.to_sym, get_association(key, instance)[:name].capitalize %><br>
+  <% if (instance.class.get_foreign_keys.map{|hash| hash[:foreign_key]}).include?(key) %>
+    <%= f.label key.to_sym, instance.class.get_association(key)[:name].capitalize %><br>
     <%= render partial: "forms/input_types/association", locals: {key: key, value: value, f:f, instance: instance} %>
   <% else %>
     <%= f.label key.to_sym %><br>
