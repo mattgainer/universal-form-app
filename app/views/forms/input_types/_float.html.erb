@@ -13,4 +13,4 @@
   }
 </script>
 
-<%= f.text_field key.to_sym, placeholder: value, onkeypress: "return validate#{key.capitalize}KeyPress(this,event)" %>
+<%= f.text_field key.to_sym, placeholder: value, onkeypress: "return validate#{key.capitalize}KeyPress(this,event)", required: required %>

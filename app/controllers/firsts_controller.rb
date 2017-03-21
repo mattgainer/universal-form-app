@@ -2,24 +2,32 @@ class FirstsController < ApplicationController
   def new
     @first = First.new
   end
+
   def show
     @first = First.find(params[:id])
   end
+
   def edit
     @first = First.find(params[:id])
   end
-  def create
-    @first = First.generate_new_instance(params)
-    puts @first.attributes
+
+  def update
+    @first = First.find(params[:id])
+    if @first.update_this_instance(params)
+      redirect_to "/firsts/#{@first.id}"
+    else
+
+    end
   end
 
-  def test
-    
+  def create
+    @first = First.generate_new_instance(params)
+    if @first.save
+      redirect_to "/firsts/#{@first.id}"
+    else
+
+    end
   end
 
   private
-
-  def first_params
-    params.require(:first).permit(First.new.attributes.keys.map {|k| k.to_sym})
-  end
 end
