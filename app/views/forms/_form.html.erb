@@ -1,13 +1,11 @@
-<br>
-<br>
-<br>
-<br>
-<% data.attributes.each do |key, value| %>
-  <% if check_exception(key, data) %>
-    <%= render partial: 'forms/form_groups', locals: {key: key, value: value, data: data, f: f} %>
+<%= form_for instance do |f| %>
+  <% instance.attributes.each do |key, value| %>
+    <% if instance.class.check_exception(key) %>
+      <%= render partial: 'forms/form_groups', locals: {key: key, value: value, instance: instance, f: f} %>
+      <br>
+    <% end %>
   <% end %>
-  <br>
+  <div>
+    <%= f.submit %>
+  </div>
 <% end %>
-<div>
-  <%= f.submit %>
-</div>

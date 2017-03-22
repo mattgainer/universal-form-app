@@ -1,4 +1,10 @@
 <div>
-  <%= f.label key.to_sym %><br>
-    <%= render partial: "forms/input_types/#{data.column_for_attribute(key).type.to_s}", locals: {key: key, value: value, f:f, data: data} %>
+  <% required = instance.class.check_required_validations(key.to_sym) %>
+  <% if (instance.class.get_foreign_keys.map{|hash| hash[:foreign_key]}).include?(key) %>
+    <%= f.label key.to_sym, instance.class.get_association(key)[:name].capitalize %><br>
+    <%= render partial: "forms/input_types/association", locals: {key: key, value: value, f:f, instance: instance, required: required} %>
+  <% else %>
+    <%= f.label key.to_sym %><br>
+    <%= render partial: "forms/input_types/#{instance.column_for_attribute(key).type.to_s}", locals: {key: key, value: value, f:f, instance: instance, required: required} %>
+  <% end %>
 </div>

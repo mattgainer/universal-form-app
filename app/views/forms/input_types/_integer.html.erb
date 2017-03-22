@@ -1,5 +1,5 @@
 <script>
-  function validateFloatKeyPress(el, evt) {
+  function validate<%= key.capitalize %>KeyPress(el, evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode;
     var number = el.value.split('.');
     if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -29,4 +29,4 @@
   }
 </script>
 
-<%= f.text_field key.to_sym, placeholder: value, onkeypress: "return validateFloatKeyPress(this,event)" %>
+<%= f.text_field key.to_sym, placeholder: value, onkeypress: "return validate#{key.capitalize}KeyPress(this,event)", required: required %>
